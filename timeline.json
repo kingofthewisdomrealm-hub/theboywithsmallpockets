@@ -1,0 +1,29 @@
+{
+  "audio": "audio/narration.mp3",
+  "note": "start = second the scene starts in the narration. shots = panel files (from panels/) shown in order, split evenly across the scene. Missing files render as a labeled placeholder card.",
+  "scenes": [
+    {"n": 1,  "start": 0,      "title": "The Village",            "shots": ["sheet_1_p01", "sheet_1_p04"]},
+    {"n": 2,  "start": 23.66,  "title": "Small Pockets",          "shots": ["sheet_1_p03"]},
+    {"n": 3,  "start": 27.66,  "title": "Everyone Holds Ten",     "shots": ["sheet_1_p02"]},
+    {"n": 4,  "start": 41.22,  "title": "The Elders",             "shots": ["sheet_1_p01"]},
+    {"n": 5,  "start": 47.91,  "title": "Every Morning",          "shots": ["sheet_1_p03", "sheet_1_p05"]},
+    {"n": 6,  "start": 65.19,  "title": "Light Under the Stone",  "shots": ["sheet_1_p06"]},
+    {"n": 7,  "start": 80.34,  "title": "The Map",                "shots": ["sheet_1_p07", "sheet_1_p08", "sheet_1_p09"]},
+    {"n": 8,  "start": 106.05, "title": "The Forest Warning",     "shots": ["sheet_1_p13", "sheet_1_p14", "sheet_1_p15"]},
+    {"n": 9,  "start": 133.82, "title": "Ten Is Not Enough",      "shots": ["sheet_1_p10", "sheet_1_p11", "sheet_1_p12"]},
+    {"n": 10, "start": 147.5,  "title": "Into the Forest",        "shots": ["sheet_1_p16"]},
+    {"n": 11, "start": 150.89, "title": "Forest of Wonder",       "shots": ["act2_forest_wonder"]},
+    {"n": 12, "start": 166.55, "title": "Growing Fear",           "shots": ["act2_growing_fear"]},
+    {"n": 13, "start": 179.39, "title": "The Panic Goblin",       "shots": ["act2_panic_goblin"]},
+    {"n": 14, "start": 196.69, "title": "The Goblin's Taunt",     "shots": ["act2_goblin_taunt"]},
+    {"n": 15, "start": 208.49, "title": "Joe Turns Back",         "shots": ["act2_turns_back"]},
+    {"n": 16, "start": 221.57, "title": "Boom. Boom. Boom.",      "shots": ["act2_ground_shakes"]},
+    {"n": 17, "start": 232.01, "title": "The Giant Is Joe",       "shots": ["act2_giant_a", "act2_giant_b"]},
+    {"n": 18, "start": 272.02, "title": "The Right Question",     "shots": ["act2_right_question"]},
+    {"n": 19, "start": 298.09, "title": "Stretching",             "shots": ["act2_stretching"]},
+    {"n": 20, "start": 320.79, "title": "The Golden Chest",       "shots": ["act3_chest"]},
+    {"n": 21, "start": 335.51, "title": "The Mirror",             "shots": ["act3_open_chest", "act3_mirror"]},
+    {"n": 22, "start": 374.38, "title": "The Return",             "shots": ["act3_return", "act3_coin"]},
+    {"n": 23, "start": 411.76, "title": "A Bigger You",           "shots": ["act3_children", "act3_closing"]}
+  ]
+}
