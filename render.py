@@ -39,14 +39,17 @@ def main():
                 p = os.path.join(tmp, f"ph_{s['n']}_{j}.jpg"); placeholder(p, s["n"], s["title"], last_img)
             shots.append((p, per))
     # one Ken Burns clip per shot (alternating zoom in / out), each padded by XF for the crossfade
-    clips = []
-    for k, (img, d) in enumerate(shots):
+    from concurrent.futures import ThreadPoolExecutor
+    def make(args):
+        k, (img, d) = args
         frames = int((d + XF) * FPS)
         z = f"1+0.12*on/{frames}" if k % 2 == 0 else f"1.12-0.12*on/{frames}"
         out = os.path.join(tmp, f"c{k:03d}.mp4")
         vf = (f"scale={OW*2}:{OH*2},zoompan=z='{z}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={OW}x{OH}:fps={FPS},format=yuv420p")
-        subprocess.run(["ffmpeg", "-y", "-v", "error", "-loop", "1", "-i", img, "-vf", vf, "-frames:v", str(frames), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", out], check=True)
-        clips.append((out, d))
+        subprocess.run(["ffmpeg", "-y", "-v", "error", "-loop", "1", "-i", img, "-vf", vf, "-frames:v", str(frames), "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20", out], check=True)
+        return (out, d)
+    with ThreadPoolExecutor(max_workers=os.cpu_count() or 4) as ex:
+        clips = list(ex.map(make, enumerate(shots)))
     # chain crossfades
     inputs, fc, prev, t = [], [], "0:v", 0.0
     for k, (c, d) in enumerate(clips):
@@ -58,7 +61,7 @@ def main():
     outname = os.path.join(ROOT, "output", "small_pockets_preview.mp4" if PREVIEW else "small_pockets.mp4")
     os.makedirs(os.path.dirname(outname), exist_ok=True)
     cmd = ["ffmpeg", "-y", "-v", "error"] + inputs + ["-i", audio, "-filter_complex", ";".join(fc) or "null",
-           "-map", f"[{prev}]" if fc else "0:v", "-map", f"{len(clips)}:a", "-c:v", "libx264", "-preset", "medium", "-crf", "20",
+           "-map", f"[{prev}]" if fc else "0:v", "-map", f"{len(clips)}:a", "-c:v", "libx264", "-preset", "veryfast", "-crf", "24",
            "-c:a", "aac", "-b:a", "192k", "-t", f"{dur:.2f}", "-movflags", "+faststart", outname]
     subprocess.run(cmd, check=True)
     print("wrote", outname)
